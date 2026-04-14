@@ -1,14 +1,21 @@
 <view class="container pb">
   <view class="card">
-    <button open-type="getPhoneNumber" bindgetphonenumber="onGetPhoneNumber" class="primary-btn full">微信授权手机号</button>
-    <button class="secondary-btn full2" bindtap="onGetNickname">获取微信昵称</button>
-
     <form-item label="手机号" required>
-      <input class="input readonly" disabled value="{{form.phone || '请先授权手机号'}}" />
+      <view class="auth-field">
+        <text class="auth-text {{form.phone ? '' : 'placeholder'}}">{{form.phone || '点击授权手机号'}}</text>
+        <button class="auth-overlay" open-type="getPhoneNumber" bindgetphonenumber="onGetPhoneNumber"></button>
+      </view>
     </form-item>
 
     <form-item label="姓名" required>
-      <input class="input" value="{{form.realName}}" data-field="realName" bindinput="onInput" placeholder="默认使用微信昵称，可手动调整" />
+      <input
+        class="input"
+        value="{{form.realName}}"
+        data-field="realName"
+        bindinput="onInput"
+        bindtap="onGetNickname"
+        placeholder="点击授权昵称后自动填充，可手动调整"
+      />
     </form-item>
 
     <form-item label="性别" required>
