@@ -1,4 +1,5 @@
 const { GENDER_OPTIONS, INCOME_OPTIONS, AGE_OPTIONS } = require('../../../constants/options');
+const { ensureSession } = require('../../../services/auth');
 const { bindPhone, createProfile, getProfile, updateProfile } = require('../../../services/user');
 const { validateProfile } = require('../../../utils/validate');
 
@@ -7,6 +8,7 @@ Page({
     loading: false,
     submitDisabled: true,
     isEdit: false,
+    nicknameFetched: false,
     form: {
       phone: '',
       realName: '',
@@ -26,6 +28,8 @@ Page({
   },
 
   async onLoad() {
+    await ensureSession();
+
     try {
       const profile = await getProfile();
       const genderIndex = GENDER_OPTIONS.findIndex((x) => x.value === profile.gender);
@@ -33,6 +37,7 @@ Page({
       const ageIndex = AGE_OPTIONS.findIndex((x) => x === profile.age);
       this.setData({
         isEdit: true,
+        nicknameFetched: Boolean(profile.nickname),
         form: { ...this.data.form, ...profile, agreePolicy: true },
         genderIndex,
         incomeIndex,
@@ -46,35 +51,44 @@ Page({
     this.setData({ submitDisabled: Boolean(validateProfile(this.data.form)) });
   },
 
+  onNameFocus() {
+    if (this.data.nicknameFetched) {
+      return;
+    }
+    this.onGetNickname();
+  },
+
   onGetNickname() {
     wx.getUserProfile({
       desc: '用于完善会员资料',
       success: ({ userInfo }) => {
         const nickname = (userInfo && userInfo.nickName) || '';
         this.setData({
+          nicknameFetched: true,
           'form.nickname': nickname,
           'form.realName': this.data.form.realName || nickname,
         });
         this.refreshValidity();
       },
       fail: () => {
-        wx.showToast({ title: '获取昵称失败', icon: 'none' });
+        wx.showToast({ title: '昵称授权未完成', icon: 'none' });
       },
     });
   },
 
   async onGetPhoneNumber(e) {
-    const code = e.detail.code;
+    const { code, errMsg } = e.detail || {};
     if (!code) {
-      wx.showToast({ title: '手机号授权失败', icon: 'none' });
+      wx.showToast({ title: errMsg?.includes('deny') ? '已取消手机号授权' : '手机号授权失败', icon: 'none' });
       return;
     }
+
     try {
       const { phone } = await bindPhone(code);
       this.setData({ 'form.phone': phone });
       this.refreshValidity();
     } catch (error) {
-      wx.showToast({ title: error.message || '绑定失败', icon: 'none' });
+      wx.showToast({ title: `绑定失败：${error.message || '请稍后重试'}`, icon: 'none' });
     }
   },
 

@@ -13,7 +13,7 @@
         value="{{form.realName}}"
         data-field="realName"
         bindinput="onInput"
-        bindtap="onGetNickname"
+        bindfocus="onNameFocus"
         placeholder="点击授权昵称后自动填充，可手动调整"
       />
     </form-item>
