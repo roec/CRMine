@@ -1,0 +1,10 @@
+.submit-wrap {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20rpx 32rpx calc(env(safe-area-inset-bottom) + 20rpx);
+  background: #fff;
+  border-top: 1rpx solid #e2e8f0;
+}
+button { height: 84rpx; line-height: 84rpx; font-size: 30rpx; }
