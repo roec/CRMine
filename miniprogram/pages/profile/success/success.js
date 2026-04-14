@@ -2,7 +2,7 @@ Page({
   goCenter() {
     wx.reLaunch({ url: '/pages/user/center/center' });
   },
-  goHome() {
-    wx.reLaunch({ url: '/pages/index/index' });
+  goForm() {
+    wx.reLaunch({ url: '/pages/profile/form/form' });
   },
 });
