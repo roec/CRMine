@@ -46,10 +46,27 @@ Page({
     this.setData({ submitDisabled: Boolean(validateProfile(this.data.form)) });
   },
 
+  onGetNickname() {
+    wx.getUserProfile({
+      desc: '用于完善会员资料',
+      success: ({ userInfo }) => {
+        const nickname = (userInfo && userInfo.nickName) || '';
+        this.setData({
+          'form.nickname': nickname,
+          'form.realName': this.data.form.realName || nickname,
+        });
+        this.refreshValidity();
+      },
+      fail: () => {
+        wx.showToast({ title: '获取昵称失败', icon: 'none' });
+      },
+    });
+  },
+
   async onGetPhoneNumber(e) {
     const code = e.detail.code;
     if (!code) {
-      wx.showToast({ title: 'Phone auth failed', icon: 'none' });
+      wx.showToast({ title: '手机号授权失败', icon: 'none' });
       return;
     }
     try {
@@ -57,7 +74,7 @@ Page({
       this.setData({ 'form.phone': phone });
       this.refreshValidity();
     } catch (error) {
-      wx.showToast({ title: error.message, icon: 'none' });
+      wx.showToast({ title: error.message || '绑定失败', icon: 'none' });
     }
   },
 
@@ -106,7 +123,7 @@ Page({
       }
       wx.redirectTo({ url: '/pages/profile/success/success' });
     } catch (err) {
-      wx.showToast({ title: err.message || 'Submit failed', icon: 'none' });
+      wx.showToast({ title: err.message || '提交失败', icon: 'none' });
     } finally {
       this.setData({ loading: false });
     }

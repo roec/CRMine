@@ -1,9 +1,9 @@
 <view class="container">
   <view class="card center">
     <view class="icon">✓</view>
-    <view class="title">Profile Submitted</view>
-    <view class="desc">Your information has been saved successfully.</view>
-    <button class="primary-btn" bindtap="goCenter">Go To User Center</button>
-    <button class="secondary-btn mt" bindtap="goHome">Back Home</button>
+    <view class="title">提交成功</view>
+    <view class="desc">您的资料已保存，我们会尽快与您联系。</view>
+    <button class="primary-btn" bindtap="goCenter">查看个人中心</button>
+    <button class="secondary-btn mt" bindtap="goHome">返回首页</button>
   </view>
 </view>

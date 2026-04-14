@@ -1,14 +1,14 @@
 <view class="container">
-  <view wx:if="{{loading}}">Loading...</view>
+  <view wx:if="{{loading}}">加载中...</view>
   <view wx:elif="{{profile}}" class="card">
-    <view class="title">User Center</view>
-    <view class="row"><text class="k">Real Name</text><text>{{profile.realName}}</text></view>
-    <view class="row"><text class="k">Nickname</text><text>{{profile.nickname || '-'}}</text></view>
-    <view class="row"><text class="k">Phone</text><text>{{maskedPhone}}</text></view>
-    <view class="row"><text class="k">Gender</text><text>{{profile.gender}}</text></view>
-    <view class="row"><text class="k">Age</text><text>{{profile.age}}</text></view>
-    <view class="row"><text class="k">Job</text><text>{{profile.job || '-'}}</text></view>
-    <view class="row"><text class="k">Income</text><text>{{profile.incomeRange || '-'}}</text></view>
-    <button class="secondary-btn" bindtap="goEdit">Edit Profile</button>
+    <view class="title">个人中心</view>
+    <view class="row"><text class="k">姓名</text><text>{{profile.realName}}</text></view>
+    <view class="row"><text class="k">昵称</text><text>{{profile.nickname || '-'}}</text></view>
+    <view class="row"><text class="k">手机号</text><text>{{maskedPhone}}</text></view>
+    <view class="row"><text class="k">性别</text><text>{{profile.genderLabel}}</text></view>
+    <view class="row"><text class="k">年龄</text><text>{{profile.age}}</text></view>
+    <view class="row"><text class="k">职业</text><text>{{profile.job || '-'}}</text></view>
+    <view class="row"><text class="k">收入区间</text><text>{{profile.incomeLabel}}</text></view>
+    <button class="secondary-btn" bindtap="goEdit">修改资料</button>
   </view>
 </view>

@@ -7,11 +7,11 @@ function isRequired(value) {
 }
 
 function validateProfile(payload) {
-  if (!isPhone(payload.phone)) return 'Please input a valid mobile number';
-  if (!isRequired(payload.realName)) return 'Real name is required';
-  if (!isRequired(payload.gender)) return 'Please select gender';
-  if (!payload.age) return 'Please select age';
-  if (!payload.agreePolicy) return 'Please agree to privacy policy';
+  if (!isPhone(payload.phone)) return '请先完成微信手机号授权';
+  if (!isRequired(payload.realName)) return '请输入姓名';
+  if (!isRequired(payload.gender)) return '请选择性别';
+  if (!payload.age) return '请选择年龄';
+  if (!payload.agreePolicy) return '请先勾选隐私政策';
   return '';
 }
 

@@ -6,7 +6,7 @@
     "pages/user/center/center"
   ],
   "window": {
-    "navigationBarTitleText": "CRMine Registration",
+    "navigationBarTitleText": "客户资料登记",
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTextStyle": "black",
     "backgroundColor": "#f5f7fb",

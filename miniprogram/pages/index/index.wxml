@@ -1,8 +1,8 @@
 <view class="container">
   <view class="card hero">
-    <view class="title">CRMine Registration MVP</view>
-    <view class="desc">Collect and maintain user profile data via WeChat Mini Program.</view>
-    <button class="primary-btn" bindtap="goProfileForm">Start Registration</button>
-    <button wx:if="{{hasProfile}}" class="secondary-btn mt" bindtap="goUserCenter">Go To User Center</button>
+    <view class="title">用户资料登记</view>
+    <view class="desc">用于客户线索收集与后续服务跟进，请先完成资料授权与填写。</view>
+    <button class="primary-btn" bindtap="goProfileForm">开始登记</button>
+    <button wx:if="{{hasProfile}}" class="secondary-btn mt" bindtap="goUserCenter">进入个人中心</button>
   </view>
 </view>

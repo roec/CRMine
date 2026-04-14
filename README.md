@@ -61,10 +61,10 @@ A production-style MVP scaffold containing:
 
 - OpenID is the identity anchor.
 - One OpenID can only have one profile.
-- Phone can come from WeChat phone authorization flow (`bind-phone`) or manual input.
+- Phone is acquired through WeChat phone authorization flow (`bind-phone`) on frontend (manual input removed as requested).
 - Required fields: `phone`, `realName`, `gender`, `age`.
 - Optional fields: `job`, `incomeRange`.
-- Frontend requires privacy agreement before submit.
+- Frontend requires privacy agreement before submit, and all mini-program UI labels are Chinese.
 - Form page supports loading existing profile for edit.
 
 ---
