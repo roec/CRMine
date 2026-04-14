@@ -1,0 +1,9 @@
+<view class="container">
+  <view class="card center">
+    <view class="icon">✓</view>
+    <view class="title">Profile Submitted</view>
+    <view class="desc">Your information has been saved successfully.</view>
+    <button class="primary-btn" bindtap="goCenter">Go To User Center</button>
+    <button class="secondary-btn mt" bindtap="goHome">Back Home</button>
+  </view>
+</view>

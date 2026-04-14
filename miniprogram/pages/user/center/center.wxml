@@ -1,0 +1,14 @@
+<view class="container">
+  <view wx:if="{{loading}}">Loading...</view>
+  <view wx:elif="{{profile}}" class="card">
+    <view class="title">User Center</view>
+    <view class="row"><text class="k">Real Name</text><text>{{profile.realName}}</text></view>
+    <view class="row"><text class="k">Nickname</text><text>{{profile.nickname || '-'}}</text></view>
+    <view class="row"><text class="k">Phone</text><text>{{maskedPhone}}</text></view>
+    <view class="row"><text class="k">Gender</text><text>{{profile.gender}}</text></view>
+    <view class="row"><text class="k">Age</text><text>{{profile.age}}</text></view>
+    <view class="row"><text class="k">Job</text><text>{{profile.job || '-'}}</text></view>
+    <view class="row"><text class="k">Income</text><text>{{profile.incomeRange || '-'}}</text></view>
+    <button class="secondary-btn" bindtap="goEdit">Edit Profile</button>
+  </view>
+</view>

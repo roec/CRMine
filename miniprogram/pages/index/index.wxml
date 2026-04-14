@@ -1,0 +1,8 @@
+<view class="container">
+  <view class="card hero">
+    <view class="title">CRMine Registration MVP</view>
+    <view class="desc">Collect and maintain user profile data via WeChat Mini Program.</view>
+    <button class="primary-btn" bindtap="goProfileForm">Start Registration</button>
+    <button wx:if="{{hasProfile}}" class="secondary-btn mt" bindtap="goUserCenter">Go To User Center</button>
+  </view>
+</view>

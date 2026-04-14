@@ -1,0 +1,3 @@
+<view class="submit-wrap">
+  <button class="primary-btn" loading="{{loading}}" disabled="{{disabled || loading}}" bindtap="onTap">{{text}}</button>
+</view>
