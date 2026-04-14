@@ -1,0 +1,42 @@
+<view class="container pb">
+  <view class="card">
+    <button open-type="getPhoneNumber" bindgetphonenumber="onGetPhoneNumber" class="primary-btn full">Use WeChat Phone Number</button>
+    <view class="divider">or input manually</view>
+
+    <form-item label="Mobile" required>
+      <input class="input" type="number" maxlength="11" value="{{form.phone}}" data-field="phone" bindinput="onInput" placeholder="Please input mobile" />
+    </form-item>
+
+    <form-item label="Real Name" required>
+      <input class="input" value="{{form.realName}}" data-field="realName" bindinput="onInput" placeholder="Please input real name" />
+    </form-item>
+
+    <form-item label="Gender" required>
+      <picker mode="selector" range="{{genders}}" range-key="label" value="{{genderIndex}}" bindchange="onGenderChange">
+        <view class="picker">{{genderIndex >= 0 ? genders[genderIndex].label : 'Select gender'}}</view>
+      </picker>
+    </form-item>
+
+    <form-item label="Age" required>
+      <picker mode="selector" range="{{ages}}" value="{{ageIndex}}" bindchange="onAgeChange">
+        <view class="picker">{{ageIndex >= 0 ? ages[ageIndex] : 'Select age'}}</view>
+      </picker>
+    </form-item>
+
+    <form-item label="Job">
+      <input class="input" value="{{form.job}}" data-field="job" bindinput="onInput" placeholder="Please input job" />
+    </form-item>
+
+    <form-item label="Income Range">
+      <picker mode="selector" range="{{incomes}}" range-key="label" value="{{incomeIndex}}" bindchange="onIncomeChange">
+        <view class="picker">{{incomeIndex >= 0 ? incomes[incomeIndex].label : 'Select income range'}}</view>
+      </picker>
+    </form-item>
+
+    <checkbox-group bindchange="onPolicyChange">
+      <label class="privacy"><checkbox value="agree" checked="{{form.agreePolicy}}" />I agree with privacy policy.</label>
+    </checkbox-group>
+  </view>
+
+  <submit-bar loading="{{loading}}" disabled="{{submitDisabled}}" text="{{isEdit ? 'Update Profile' : 'Submit Profile'}}" bind:submit="onSubmit" />
+</view>
