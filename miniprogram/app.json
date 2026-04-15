@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "pages/profile/form/form",
+    "pages/profile/success/success",
+    "pages/user/center/center"
+  ],
+  "window": {
+    "navigationBarTitleText": "客户资料登记",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f5f7fb",
+    "backgroundTextStyle": "dark"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "form-item": "/components/form-item/index",
+    "submit-bar": "/components/submit-bar/index"
+  }
+}
