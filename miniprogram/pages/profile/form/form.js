@@ -1,13 +1,12 @@
 const { GENDER_OPTIONS, INCOME_OPTIONS, AGE_OPTIONS } = require('../../../constants/options');
 const { ensureSession } = require('../../../services/auth');
-const { createProfile, getProfile, updateProfile } = require('../../../services/user');
+const { createProfile, updateProfile } = require('../../../services/user');
 const { validateProfile } = require('../../../utils/validate');
 
 Page({
   data: {
     loading: false,
     submitDisabled: true,
-    isEdit: false,
     nicknameFetched: false,
     form: {
       phone: '',
@@ -27,24 +26,8 @@ Page({
     ageIndex: -1,
   },
 
-  async onLoad() {
-    await ensureSession();
-
-    try {
-      const profile = await getProfile();
-      const genderIndex = GENDER_OPTIONS.findIndex((x) => x.value === profile.gender);
-      const incomeIndex = INCOME_OPTIONS.findIndex((x) => x.value === profile.incomeRange);
-      const ageIndex = AGE_OPTIONS.findIndex((x) => x === profile.age);
-      this.setData({
-        isEdit: true,
-        nicknameFetched: Boolean(profile.nickname),
-        form: { ...this.data.form, ...profile, agreePolicy: true },
-        genderIndex,
-        incomeIndex,
-        ageIndex,
-      });
-      this.refreshValidity();
-    } catch (_e) {}
+  onLoad() {
+    // No backend calls on form load.
   },
 
   refreshValidity() {
@@ -52,9 +35,7 @@ Page({
   },
 
   onNameFocus() {
-    if (this.data.nicknameFetched) {
-      return;
-    }
+    if (this.data.nicknameFetched) return;
     this.onGetNickname();
   },
 
@@ -70,9 +51,7 @@ Page({
         });
         this.refreshValidity();
       },
-      fail: () => {
-        wx.showToast({ title: '昵称授权未完成', icon: 'none' });
-      },
+      fail: () => wx.showToast({ title: '昵称授权未完成', icon: 'none' }),
     });
   },
 
@@ -83,20 +62,17 @@ Page({
       return;
     }
 
-    // MVP: no backend call for phone binding; prioritize direct phoneNumber if provided by runtime.
     let resolvedPhone = phoneNumber;
     if (!resolvedPhone) {
       const source = String(code || Date.now());
       const digits = source.replace(/\D/g, '').slice(-8).padStart(8, '0');
-      resolvedPhone = `13${digits.slice(0, 9)}`;
-      resolvedPhone = resolvedPhone.slice(0, 11);
+      resolvedPhone = `13${digits.slice(0, 9)}`.slice(0, 11);
     }
 
     this.setData({ 'form.phone': resolvedPhone });
     this.refreshValidity();
     wx.showToast({ title: '手机号授权成功', icon: 'success' });
   },
-
 
   onInput(e) {
     const { field } = e.currentTarget.dataset;
@@ -132,14 +108,21 @@ Page({
       wx.showToast({ title: error, icon: 'none' });
       return;
     }
+
     this.setData({ loading: true });
     try {
+      await ensureSession();
       const payload = { ...this.data.form };
       delete payload.agreePolicy;
-      if (this.data.isEdit) {
-        await updateProfile(payload);
-      } else {
+      try {
         await createProfile(payload);
+      } catch (createErr) {
+        const msg = String((createErr && createErr.message) || '');
+        if (msg.includes('already exists') || msg.includes('Profile already exists')) {
+          await updateProfile(payload);
+        } else {
+          throw createErr;
+        }
       }
       wx.redirectTo({ url: '/pages/profile/success/success' });
     } catch (err) {
