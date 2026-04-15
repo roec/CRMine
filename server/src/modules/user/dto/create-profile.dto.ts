@@ -14,23 +14,23 @@ export class CreateProfileDto {
   @IsString()
   @IsNotEmpty()
   @IsPhoneNumber('CN')
-  phone: string;
+  phone!: string;
 
   @IsString()
   @IsNotEmpty()
-  realName: string;
+  realName!: string;
 
   @IsOptional()
   @IsString()
   nickname?: string;
 
   @IsEnum(Gender)
-  gender: Gender;
+  gender!: Gender;
 
   @IsInt()
   @Min(1)
   @Max(120)
-  age: number;
+  age!: number;
 
   @IsOptional()
   @IsString()

@@ -4,5 +4,5 @@ export class WxLoginDto {
   @IsString()
   @IsNotEmpty()
   @Length(4, 200)
-  code: string;
+  code!: string;
 }

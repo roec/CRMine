@@ -4,5 +4,5 @@ export class BindPhoneDto {
   @IsString()
   @IsNotEmpty()
   @Length(4, 255)
-  phoneCode: string;
+  phoneCode!: string;
 }

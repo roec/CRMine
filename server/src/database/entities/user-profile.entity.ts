@@ -33,10 +33,10 @@ export enum ProfileStatus {
 @Index(['phone'], { unique: true })
 export class UserProfile {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column({ length: 64 })
-  openid: string;
+  openid!: string;
 
   @Column({ length: 64, nullable: true })
   unionid?: string;
@@ -48,16 +48,16 @@ export class UserProfile {
   avatarUrl?: string;
 
   @Column({ length: 20 })
-  phone: string;
+  phone!: string;
 
   @Column({ length: 50 })
-  realName: string;
+  realName!: string;
 
   @Column({ type: 'enum', enum: Gender })
-  gender: Gender;
+  gender!: Gender;
 
   @Column({ type: 'int' })
-  age: number;
+  age!: number;
 
   @Column({ length: 20, nullable: true })
   ageRange?: string;
@@ -69,17 +69,17 @@ export class UserProfile {
   incomeRange?: IncomeRange;
 
   @Column({ length: 50, default: 'wechat_mini_program' })
-  registerChannel: string;
+  registerChannel!: string;
 
   @Column({ length: 100, nullable: true })
   registerSource?: string;
 
   @Column({ type: 'enum', enum: ProfileStatus, default: ProfileStatus.ACTIVE })
-  status: ProfileStatus;
+  status!: ProfileStatus;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt!: Date;
 }
