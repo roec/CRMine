@@ -1,0 +1,4 @@
+<view class="form-item">
+  <view class="label">{{label}}<text wx:if="{{required}}" class="required">*</text></view>
+  <view class="control"><slot /></view>
+</view>
