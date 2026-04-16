@@ -40,3 +40,16 @@ docker compose -f docker-compose.full.yml up --build
 - `POST /api/user/profile` (JWT)
 - `GET /api/user/profile` (JWT)
 - `PUT /api/user/profile` (JWT)
+
+
+## HTTPS Support
+
+Set these env vars to enable HTTPS server directly in NestJS:
+
+```bash
+ENABLE_HTTPS=true
+HTTPS_CERT_PATH=/path/to/fullchain.pem
+HTTPS_KEY_PATH=/path/to/privkey.pem
+```
+
+Then backend can be served as `https://api.xxllm.fun:3000/` (assuming DNS, cert and firewall are configured).
